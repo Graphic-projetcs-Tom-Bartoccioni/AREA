@@ -1,0 +1,36 @@
+version: '3'
+
+volumes:
+  db-data:
+  apk-data:
+
+services:
+  db:
+    image: mongo
+    ports: 
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+      - MONGO_INITDB_DATABASE=area
+    volumes:
+      - ./db/init/:/docker-entrypoint-initdb.d/:ro
+      - db-data:/data/db
+  server:
+    build: ./server
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+  client_mobile:
+    build: ./client_mobile
+    volumes:
+      - apk-data:/data/apk
+  client_web:
+    build: ./client_web
+    ports:
+      - 8081:4200
+    volumes:
+      - apk-data:/data/apk
+    depends_on:
+      - client_mobile
