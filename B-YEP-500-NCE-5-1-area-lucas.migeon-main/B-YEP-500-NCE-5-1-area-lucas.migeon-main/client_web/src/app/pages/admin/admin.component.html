@@ -1,0 +1,25 @@
+<div>
+  <div class="button-container">
+    <button class="button-add" (click)="navigateUserCreationPage()">
+      <mat-icon class="icon-add">add</mat-icon>
+    </button>
+  </div>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Action</th>
+    </tr>
+    <tr *ngFor="let user of users">
+      <td>{{user.name}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.role}}</td>
+      <td>
+        <button class="button-trash" (click)="deleteUser(user)">
+          <mat-icon class="icon-trash">delete</mat-icon>
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>

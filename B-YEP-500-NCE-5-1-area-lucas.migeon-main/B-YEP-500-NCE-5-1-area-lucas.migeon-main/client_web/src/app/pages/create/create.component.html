@@ -1,0 +1,131 @@
+<div class="create-container">
+    <div class="progress-bar-container">
+        <div class="progress-bar">
+            <div [ngClass]="{'progress-step-active': progressStep === 1}" class="progress-step"></div>
+            <div [ngClass]="{'progress-step-active': progressStep === 2}" class="progress-step"></div>
+            <div [ngClass]="{'progress-step-active': progressStep === 3}" class="progress-step"></div>
+            <div [ngClass]="{'progress-step-active': progressStep === 4}" class="progress-step"></div>
+            <div [ngClass]="{'progress-step-active': progressStep === 5}" class="progress-step"></div>
+            <div [ngClass]="{'progress-step-active': progressStep === 6}" class="progress-step"></div>
+        </div>
+    </div>
+    <div *ngIf="(progressStep === 1)" class="step1-container">
+        <div  class="title-container">
+            <h1>SELECT SERVICE ACTION</h1>
+        </div>
+        <hr class="line" size="5"/>
+        <div class="cards">
+            <button class="card-discord card" (click)="selectServiceAction('discord')">
+                <mat-icon class="icon icon-discord">discord</mat-icon>
+            </button>
+            <button class="card-youtube card" (click)="selectServiceAction('youtube')">
+                <img src="../../../assets/image/youtube_logo.png" width="100px" height="70px"/>
+            </button>
+            <button class="card-timer card" (click)="selectServiceAction('timer')">
+                <mat-icon class="icon icon-discord">schedule</mat-icon>
+            </button>
+            <button class="card-weather card" (click)="selectServiceAction('weather')">
+                <mat-icon class="icon icon-discord">cloud</mat-icon>
+            </button>
+            <button class="card-github card" (click)="selectServiceAction('randomUser')">
+              <img src="../../../assets/image/random_user_img.png" width="300px" height="40px"/>
+            </button>
+            <!-- <button class="card-github card" (click)="selectServiceAction('github')">
+                <img src="../../../assets/image/github_logo.png" width="100px" height="100px"/>
+            </button> -->
+        </div>
+    </div>
+    <div *ngIf="(progressStep === 2)" class="step1-container">
+        <div  class="title-container">
+            <h1>SELECT ACTION</h1>
+        </div>
+        <hr class="line" size="5"/>
+        <div class="action-cards">
+            <button [ngStyle]="{'background-color': colorActionService}" *ngFor="let action of actionList" (click)="selectAction(action)" class="action-card">
+                <div class="title-card-container">
+                    <h1 class="title-card">{{ action.title }}</h1>
+                </div>
+                <div class="description-card-container">
+                    <p>{{ action.description }}</p>
+                </div>
+            </button>
+        </div>
+    </div>
+    <div *ngIf="(progressStep === 3)" class="step3-container">
+        <div  class="title-container">
+            <h1>SELECT SERVICE REACTION</h1>
+        </div>
+        <hr class="line" size="5"/>
+        <div class="cards">
+            <button class="card-discord card" (click)="selectServiceReaction('discord')">
+                <mat-icon class="icon icon-discord">discord</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div *ngIf="(progressStep === 4)" class="step4-container">
+        <div  class="title-container">
+            <h1>SELECT REACTION</h1>
+        </div>
+        <hr class="line" size="5"/>
+        <div class="action-cards">
+            <button [ngStyle]="{'background-color': colorReactionService}" *ngFor="let reaction of reactionList"  (click)="selectReaction(reaction)" class="action-card">
+                <div class="title-card-container">
+                    <h1 class="title-card">{{ reaction.title }}</h1>
+                </div>
+                <div class="description-card-container">
+                    <p>{{ reaction.description }}</p>
+                </div>
+            </button>
+        </div>
+    </div>
+    <!-- <div *ngIf="(progressStep === 5)">
+        <div  class="title-container">
+            <h1>CONNECT TO THE SERVICE</h1>
+        </div>
+        <hr class="line" size="5"/>
+        <div class="connection-cards">
+            <div *ngIf="isNeedingToDisplayServiceActionConnection()" [ngStyle]="{'background-color': colorActionService}" class="connection-card">
+                <mat-icon *ngIf="data.actionService === 'discord'" class="icon-connect">discord</mat-icon>
+                <mat-icon *ngIf="data.actionService === 'timer'" class="icon-connect">schedule</mat-icon>
+                <mat-icon *ngIf="data.actionService === 'weather'" class="icon-connect">cloud</mat-icon>
+                <div *ngIf="data.actionService === 'youtube'" class="image-connect">
+                    <img src="../../../assets/image/youtube_logo.png" width="100px" height="70px"/>
+                </div>
+                <div *ngIf="data.actionService === 'github'" class="image-connect">
+                    <img src="../../../assets/image/github_logo.png" width="100px" height="100px"/>
+                </div>
+                <button *ngIf="actionConnected === false" class="button-connect" (click)="connectionActionService(data.actionService)">Connect</button>
+                <mat-icon *ngIf="actionConnected === true" class="icon-checked">check_circle</mat-icon>
+            </div>
+            <div [ngStyle]="{'background-color': colorReactionService}" *ngIf="isNeedingToDisplayServiceReactionConnection()" class="connection-card">
+                <mat-icon *ngIf="data.reactionService === 'discord'" class="icon-connect">discord</mat-icon>
+                <mat-icon *ngIf="data.reactionService === 'timer'" class="icon-connect">schedule</mat-icon>
+                <mat-icon *ngIf="data.reactionService === 'weather'" class="icon-connect">cloud</mat-icon>
+                <div *ngIf="data.reactionService === 'youtube'" class="image-connect">
+                    <img src="../../../assets/image/youtube_logo.png" width="100px" height="70px"/>
+                </div>
+                <div *ngIf="data.reactionService === 'github'" class="image-connect">
+                    <img src="../../../assets/image/github_logo.png" width="100px" height="100px"/>
+                </div>
+                <button *ngIf="reactionConnected === false" class="button-connect" (click)="connectionReactionService(data.reactionService)">Connect</button>
+                <mat-icon *ngIf="reactionConnected === true" class="icon-checked">check_circle</mat-icon>
+            </div>
+        </div>
+    </div> -->
+    <div *ngIf="progressStep === 6">
+        <div  class="title-container">
+            <h1>SELECT YOUR TITLE</h1>
+        </div>
+        <hr class="line" size="5"/>
+        <div class="inputContainer">
+            <input #box (keyup)="setValueInput(box.value)" class="inputName" placeholder="Enter Name" id="name" type="text">
+        </div>
+    </div>
+    <div class="button-container">
+        <div class="buttons">
+            <button class="button-previous" *ngIf="progressStep > 1 && progressStep < 6" (click)="previousStep()">PREVIOUS</button>
+            <button [ngClass]="{'button-cancel-2': progressStep > 1}" class="button-cancel" (click)="cancel()">CANCEL</button>
+            <button class="button-previous" *ngIf="progressStep == 6" (click)="save()">SAVE</button>
+        </div>
+    </div>
+</div>
